@@ -1,0 +1,8 @@
+db:
+  url: jdbc:postgresql://localhost:5432/agona-db
+  username: postgres
+  password: 1234
+  hikari:
+    max-pool-size: 20
+  driver:
+    classname: org.postgresql.Driver

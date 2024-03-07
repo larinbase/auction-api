@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+
+    <changeSet id="1" author="larinbase">
+        <createTable tableName="account" remarks="Аккаунт">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" primaryKeyName="account_pk"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="larinbase">
+        <createTable tableName="auction" remarks="Аукцион">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" primaryKeyName="auction_pk"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="account_id" type="uuid">
+                <constraints nullable="false" foreignKeyName="account_pk"/>
+            </column>
+            <column name="status" type="varchar(10)" defaultValue="open">
+                <constraints nullable="false" checkConstraint="status in ('open', 'close')"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="larinbase">
+        <createTable tableName="lot" remarks="Лот">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" primaryKeyName="lot_pk"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="varchar(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="artikul" type="varchar(100)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="status" type="varchar(10)" defaultValue="open">
+                <constraints nullable="false" checkConstraint="lot.status in ('open', 'close')"/>
+            </column>
+            <column name="auction_id" type="uuid">
+                <constraints nullable="false" foreignKeyName="auction_pk"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+        <changeSet id="4" author="larinbase">
+            <createTable tableName="bet" remarks="Ставка">
+                <column name="id" type="uuid">
+                    <constraints primaryKey="true" primaryKeyName="bet_pk"/>
+                </column>
+                <column name="amount" type="numeric">
+                    <constraints nullable="false"/>
+                </column>
+                <column name="date_time" type="date" >
+                    <constraints nullable="false"/>
+                </column>
+                <column name="lot_id" type="uuid">
+                    <constraints nullable="false" foreignKeyName="lot_pk"/>
+                </column>
+                <column name="account_id" type="uuid">
+                    <constraints nullable="false" foreignKeyName="account_pk"/>
+                </column>
+            </createTable>
+        </changeSet>
+
+        <changeSet id="5" author="larinbase">
+            <createTable tableName="award">
+                <column name="id" type="uuid">
+                    <constraints primaryKey="true" primaryKeyName="award_pk"/>
+                </column>
+                <column name="lot_id" type="uuid">
+                    <constraints nullable="false" foreignKeyName="lot_pk"/>
+                </column>
+                <column name="account_id" type="uuid">
+                    <constraints nullable="false" foreignKeyName="account_pk"/>
+                </column>
+            </createTable>
+        </changeSet>
+
+
+</databaseChangeLog>

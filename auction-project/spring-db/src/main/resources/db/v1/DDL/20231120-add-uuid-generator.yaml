@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: larinbase
+      changes:
+        - addDefaultValue:
+            tableName: account
+            columnName: id
+            defaultValueComputed: uuid_generate_v4()
+  - changeSet:
+      id: 2
+      author: larinbase
+      changes:
+        - addDefaultValue:
+            tableName: auction
+            columnName: id
+            defaultValueComputed: uuid_generate_v4()
+  - changeSet:
+      id: 3
+      author: larinbase
+      changes:
+        - addDefaultValue:
+            tableName: lot
+            columnName: id
+            defaultValueComputed: uuid_generate_v4()
+  - changeSet:
+      id: 4
+      author: larinbase
+      changes:
+        - addDefaultValue:
+            tableName: bet
+            columnName: id
+            defaultValueComputed: uuid_generate_v4()
+  - changeSet:
+      id: 5
+      author: larinbase
+      changes:
+        - addDefaultValue:
+            tableName: award
+            columnName: id
+            defaultValueComputed: uuid_generate_v4()
